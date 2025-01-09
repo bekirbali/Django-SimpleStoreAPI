@@ -142,8 +142,21 @@ USE_TZ = True
 STATIC_URL = 'static/'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+# Media files
 MEDIA_URL = '/media/'
-MEDIA_ROOT = BASE_DIR / 'media'
+MEDIA_ROOT = BASE_DIR / 'mediafiles'
+
+# Ensure media files directory exists
+MEDIA_ROOT.mkdir(parents=True, exist_ok=True)
+
+# Additional static files settings
+STATICFILES_DIRS = [
+    BASE_DIR / "static",
+]
+
+# Create static directory if it doesn't exist
+Path(BASE_DIR / "static").mkdir(parents=True, exist_ok=True)
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field

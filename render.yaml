@@ -6,8 +6,20 @@ services:
     startCommand: "gunicorn main.wsgi:application"
     envVars:
       - key: DEBUG
-        value: False
+        value: false
       - key: SECRET_KEY
         sync: false
       - key: PYTHON_VERSION
         value: 3.11.0
+      - key: DATABASE_URL
+        fromDatabase:
+          name: stockapi-db
+          property: connectionString
+    disk:
+      name: media
+      mountPath: /opt/render/project/src/mediafiles
+      sizeGB: 1
+
+databases:
+  - name: stockapi-db
+    plan: free
